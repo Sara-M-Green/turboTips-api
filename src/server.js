@@ -7,6 +7,8 @@ const db = knex({
     connection: DB_URL
 })
 
+app.set('db', db)
+
 
 app.listen(PORT, () => {
     console.log(`Server is listening on http://localhost${PORT}`)

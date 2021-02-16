@@ -4,7 +4,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
-const DepartmentsService = require('./departments-service')
+const TipsService = require('./tips-service')
 
 const app = express()
 
@@ -16,8 +16,13 @@ app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 
-app.get('/departments', (req, res, next) => {
-    res.send('All departments')
+app.get('/tips', (req, res, next) => {
+    const knexInstance = req.app.get('db')
+    TipsService.getAllTips(knexInstance)
+        .then(tips => {
+            res.json(tips)
+        })
+        .catch(next)
 })
 
 app.get('/', (req, res) => {
