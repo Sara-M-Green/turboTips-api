@@ -27,4 +27,4 @@ When your new project is ready for deployment, add a new Heroku application with
 
 
 ## How to run seeds
-psql -U Sara -d turboTips -f ./turboTips-api/seeds/seed.departments.sql
+psql -U Sara -d turboTips -f ./seeds/seed.tips.sql

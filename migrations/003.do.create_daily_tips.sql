@@ -1,6 +1,6 @@
 CREATE TABLE daily_tips (
-    date date,
-    emp_id numeric,
+    tip_date INTEGER,
+    emp_id INTEGER,
     bottles INTEGER,
-    tips numeric
+    tips NUMERIC(5,2)
 );
