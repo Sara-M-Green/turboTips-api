@@ -123,7 +123,44 @@ describe(`Tips Endpoints`, function() {
                         .expect([postRes.body])
                 )
         })
+
+        const requiredFields = ['tip_date', 'emp_id', 'tips']
+
+        requiredFields.forEach(field => {
+            const newTipObject = {
+                tip_date: 22220202,
+                emp_id: 2,
+                tips: 123.23
+            }
+
+            it(`responds with 400 and an error message when the ${field} is missing`, () => {
+                delete newTipObject[field]
+
+                return supertest(app)
+                    .post('/tips')
+                    .send(newTipObject)
+                    .expect(400, {
+                        error: { message: `Missing '${field}' in request body`}
+                    })
+            })
+        })
     })
+
+    // describe.only(`DELETE /tips/:date`, () => {
+    //     context('Given there are tips in the database', () => {
+    //         cost testTips = makeTipsArray()
+
+    //         beforeEach('insert tips', () => {
+    //             return db
+    //                 .into('daily_tips')
+    //                 .insert(testTips)
+    //         })
+
+    //         it('responds with 204 and removes the tip object', () => {
+                
+    //         })
+    //     })
+    // })
     
     
 })

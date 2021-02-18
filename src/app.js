@@ -6,7 +6,7 @@ const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const types = require('pg').types
 const TipsService = require('./tips/tips-service')
-const tipsRouter = require('./tips/tips-router')
+// const tipsRouter = require('./tips/tips-router')
 
 const app = express()
 const jsonParser = express.json()
@@ -28,46 +28,56 @@ function processTips(rows){
     return rows
 }
 
-app.use('/tips', tipsRouter)
+// app.use('/tips', tipsRouter)
 
-// app.get('/tips', (req, res, next) => {
-//     const knexInstance = req.app.get('db')
-//     TipsService.getAllTips(knexInstance)
-//         .then(tips => {
-//             res.json(tips)
-//         })
-//         .catch(next)
-// })
+app.get('/tips', (req, res, next) => {
+    const knexInstance = req.app.get('db')
+    TipsService.getAllTips(knexInstance)
+        .then(tips => {
+            res.json(tips)
+        })
+        .catch(next)
+})
 
-// app.post('/tips', jsonParser, (req, res, next) => {
-//     const { tip_date, emp_id, bottles, tips } = req.body
-//     const newTipObject = { tip_date, emp_id, bottles, tips }
-//     TipsService.addDailyTips(
-//         req.app.get('db'),
-//         newTipObject
-//     )
-//         .then(tipObject => {
-//             res
-//                 .status(201)
-//                 .location(`/tips/${tipObject.tip_date}`)
-//                 .json(tipObject)
-//         })
-//         .catch(next)
-// })
+app.post('/tips', jsonParser, (req, res, next) => {
+    const { tip_date, emp_id, bottles, tips } = req.body
+    const newTipObject = { tip_date, emp_id, tips }
 
-// app.get('/tips/:date', (req, res, next) => {
-//     const knexInstance = req.app.get('db')
-//     TipsService.getByDate(knexInstance, req.params.date)
-//         .then(tips => {
-//             if(tips.length < 1) {
-//                 return res.status(404).json({
-//                     error: { message: `No tips for that date found`}
-//                 })
-//             }
-//             res.json(tips)
-//         })
-//         .catch(next)
-// })
+    for (const [key, value] of Object.entries(newTipObject)) {
+        if (value == null) {
+            return res.status(400).json({
+                error: { message: `Missing '${key}' in request body`}
+            })
+        }
+    }
+
+    newTipObject.bottles = bottles
+    TipsService.addDailyTips(
+        req.app.get('db'),
+        newTipObject
+    )
+        .then(tipObject => {
+            res
+                .status(201)
+                .location(`/tips/${tipObject.tip_date}`)
+                .json(tipObject)
+        })
+        .catch(next)
+})
+
+app.get('/tips/:date', (req, res, next) => {
+    const knexInstance = req.app.get('db')
+    TipsService.getByDate(knexInstance, req.params.date)
+        .then(tips => {
+            if(tips.length < 1) {
+                return res.status(404).json({
+                    error: { message: `No tips for that date found`}
+                })
+            }
+            res.json(tips)
+        })
+        .catch(next)
+})
 
 app.get('/', (req, res) => {
     res.send('Hello, turboTips!')
