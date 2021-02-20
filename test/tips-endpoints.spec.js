@@ -25,7 +25,7 @@ describe(`Tips Endpoints`, function() {
 
     afterEach('cleanup', () => db('daily_tips').truncate())
 
-    describe(`GET /tips`, () => {
+    describe(`GET /api/tips`, () => {
         context('Given there are daily_tips in the db', () => {
             const testTips = makeTipsArray()
 
@@ -35,9 +35,9 @@ describe(`Tips Endpoints`, function() {
                     .insert(testTips)
             })
 
-            it('GET /tips responds with 200 and all of the daily tips', () => {
+            it('GET /api/tips responds with 200 and all of the daily tips', () => {
                 return supertest(app)
-                    .get('/tips')
+                    .get('/api/tips')
                     .expect(200, testTips)
             })    
         })
@@ -66,12 +66,12 @@ describe(`Tips Endpoints`, function() {
     })
 
 
-    describe(`GET /tips/:date`, () => {
+    describe(`GET /api/tips/:date`, () => {
         context(`Given no tips in db`, () => {
             it(`responds with 404`, () => {
                 const date = 17770704
                 return supertest(app)
-                    .get(`/tips/${date}`)
+                    .get(`/api/tips/${date}`)
                     .expect(404, { error: { message: `No tips for that date found`}})
             })
         })
@@ -85,19 +85,19 @@ describe(`Tips Endpoints`, function() {
                     .insert(testTips)
             })
 
-            it('GET /tips/:date responds with 200 and tips for specified date', () => {
+            it('GET /api/tips/:date responds with 200 and tips for specified date', () => {
                 const date = 20200201
                 const expectedTips = testTips.filter(function(tips) {
                     return tips.tip_date === date
                 })
                 return supertest(app)
-                    .get(`/tips/${date}`)
+                    .get(`/api/tips/${date}`)
                     .expect(200, expectedTips)
             })
         })
     })  
 
-    describe(`POST /tips`, () => {
+    describe(`POST /api/tips`, () => {
         it('creates a tip object responding with 201 and that object', function() {
             const newTipObject = {
                 tip_date: 11111111,
@@ -107,7 +107,7 @@ describe(`Tips Endpoints`, function() {
             }
 
             return supertest(app)
-                .post('/tips')
+                .post('/api/tips')
                 .send(newTipObject)
                 .expect(201)
                 .expect(res => {
@@ -115,11 +115,11 @@ describe(`Tips Endpoints`, function() {
                     expect(res.body.emp_id).to.eql(newTipObject.emp_id)
                     expect(res.body.bottles).to.eql(newTipObject.bottles)
                     expect(res.body.tips).to.eql(newTipObject.tips)
-                    expect(res.headers.location).to.eql(`/tips/${res.body.tip_date}`)
+                    expect(res.headers.location).to.eql(`/api/tips/${res.body.tip_date}`)
                 })
                 .then(postRes =>
                     supertest(app)
-                        .get(`/tips/${postRes.body.tip_date}`)
+                        .get(`/api/tips/${postRes.body.tip_date}`)
                         .expect([postRes.body])
                 )
         })
@@ -137,7 +137,7 @@ describe(`Tips Endpoints`, function() {
                 delete newTipObject[field]
 
                 return supertest(app)
-                    .post('/tips')
+                    .post('/api/tips')
                     .send(newTipObject)
                     .expect(400, {
                         error: { message: `Missing '${field}' in request body`}
