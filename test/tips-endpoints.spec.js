@@ -3,7 +3,7 @@ const knex = require('knex')
 const supertest = require('supertest')
 const app = require('../src/app')
 const TipsService = require('../src/tips/tips-service')
-const { makeTipsArray } = require('./tips.fixtures')
+const { makeTipsArray, makeEmployeeArray } = require('./tips.fixtures')
 const types = require('pg').types
 
 types.setTypeParser(1700, 'text', parseFloat);
@@ -28,11 +28,17 @@ describe(`Tips Endpoints`, function() {
     describe(`GET /api/tips`, () => {
         context('Given there are daily_tips in the db', () => {
             const testTips = makeTipsArray()
+            const testEmployees = makeEmployeeArray()
 
             beforeEach('insert tips', () => {
                 return db
-                    .into('daily_tips')
-                    .insert(testTips)
+                    .into('employees')
+                    .insert(testEmployees)
+                    .then(() => {
+                        return db
+                        .into('daily_tips')
+                        .insert(testTips)
+                    })
             })
 
             it('GET /api/tips responds with 200 and all of the daily tips', () => {

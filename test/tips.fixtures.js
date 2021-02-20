@@ -1,3 +1,19 @@
+function makeEmployeeArray() {
+    return [
+        {emp_name: "Back of House"},
+        {emp_name: "JT"},
+        {emp_name: "Fernanda G"},
+        {emp_name: "Fernanda T"},
+        {emp_name: "Estefania"},
+        {emp_name: "Jesus"},
+        {emp_name: "Maddy"},
+        {emp_name: "Cam"},
+        {emp_name: "Josh"},
+        {emp_name: "Alec"},
+        {emp_name: "Steph"},
+    ]
+}
+
 function makeTipsArray() {
     return [
         {
@@ -28,5 +44,6 @@ function makeTipsArray() {
 }
 
 module.exports = {
+    makeEmployeeArray,
     makeTipsArray,
 }
