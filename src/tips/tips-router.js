@@ -1,6 +1,6 @@
+const path = require('path')
 const express = require('express')
 const TipsService = require('./tips-service')
-const path = require('path')
 
 const tipsRouter = express.Router()
 const jsonParser = express.json()
