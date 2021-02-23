@@ -1,16 +1,49 @@
 function makeEmployeeArray() {
     return [
-        {emp_name: "Back of House"},
-        {emp_name: "JT"},
-        {emp_name: "Fernanda G"},
-        {emp_name: "Fernanda T"},
-        {emp_name: "Estefania"},
-        {emp_name: "Jesus"},
-        {emp_name: "Maddy"},
-        {emp_name: "Cam"},
-        {emp_name: "Josh"},
-        {emp_name: "Alec"},
-        {emp_name: "Steph"},
+        {
+            emp_id: 1,
+            emp_name: "Back of House"
+        },
+        {
+            emp_id: 2,
+            emp_name: "JT"
+        },
+        {
+            emp_id: 3,
+            emp_name: "Fernanda G"
+        },
+        {
+            emp_id: 4,
+            emp_name: "Fernanda T"
+        },
+        {
+            emp_id: 5,
+            emp_name: "Estefania"
+        },
+        {
+            emp_id: 6,
+            emp_name: "Jesus"
+        },
+        {
+            emp_id: 7,
+            emp_name: "Maddy"
+        },
+        {
+            emp_id: 8,
+            emp_name: "Cam"
+        },
+        {
+            emp_id: 9,
+            emp_name: "Josh"
+        },
+        {
+            emp_id: 10,
+            emp_name: "Alec"
+        },
+        {
+            emp_id: 11,
+            emp_name: "Steph"
+        },
     ]
 }
 

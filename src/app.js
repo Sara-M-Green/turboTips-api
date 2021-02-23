@@ -9,6 +9,7 @@ const types = require('pg').types
 const tipsRouter = require('./tips/tips-router')
 const employeesRouter = require('./employees/employees-router')
 const departmentsRouter = require('./departments/departments-router')
+const employeeDepartmentRouter = require('./employeeDepartment/employeeDepartments-router')
 
 const app = express()
 
@@ -32,6 +33,7 @@ function processTips(rows){
 app.use('/api/tips', tipsRouter)
 app.use('/api/employees', employeesRouter)
 app.use('/api/departments', departmentsRouter)
+app.use('/api/employee-departments', employeeDepartmentRouter)
 
 app.get('/api', (req, res) => {
     res.send('Hello, turboTips!')
