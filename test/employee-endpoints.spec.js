@@ -2,7 +2,6 @@ const { expect } = require('chai')
 const knex = require('knex')
 const supertest = require('supertest')
 const app = require('../src/app')
-const { getAllEmployees } = require('../src/employees/employees-service')
 const EmployeesService = require('../src/employees/employees-service')
 const { makeEmployeeArray } = require('./tips.fixtures')
 
@@ -12,7 +11,7 @@ describe.only('Employee endpoints', function() {
     before('make knex instance', () => {
         db = knex({
             client: 'pg',
-            connection: process.env.TEST_DB_URL,
+            connection: process.env.TEST_DATABASE_URL,
         })
         app.set('db', db)
     })
