@@ -19,8 +19,10 @@ const morganOption = (NODE_ENV === 'production')
 
 app.use(morgan(morganOption))
 app.use(helmet())
-app.use(cors({ origin:'http://localhost:3000' }))
+// app.use(cors({ origin:'http://localhost:3000' }))
 // app.use(cors())
+app.options('*', cors())
+
 
 types.setTypeParser(1700, 'text', parseFloat);
 
