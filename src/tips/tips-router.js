@@ -40,7 +40,7 @@ tipsRouter
                 console.log(tipObject)
                 res
                     .status(201)
-                    .location(path.posix.join(req.originalUrl, `/${newTipObject.tip_date}`))
+                    .location(path.posix.join(req.originalUrl, `/`))
                     .json(tipObject)
             })
             .catch(next)

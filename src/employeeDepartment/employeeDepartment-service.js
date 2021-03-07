@@ -1,6 +1,9 @@
 const employeeDepartmentService = {
     getAll(knex) {
-        return knex.select('*').from('employee_department')
+        return knex('employee_department')
+            .join('departments', 'employee_department.dept_id', '=', 'departments.dept_id')
+            .join('employees', 'employee_department.emp_id', '=', 'employees.emp_id')
+            .select('employees.emp_name', 'departments.dept_name')
     },
     addEmpDept(knex, newEmpDept) {
         return knex

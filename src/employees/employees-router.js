@@ -47,25 +47,25 @@ employeesRouter
     })
 
 employeesRouter
-    .route('/:emp_id')
+    .route('/:dept')
     .all((req, res, next) => {
-        EmployeesService.getById(
+        EmployeesService.getByDepartment(
             req.app.get('db'),
-            req.params.emp_id
+            req.params.dept
         )
-            .then(employee => {
-                if (!employee) {
+            .then(dept => {
+                if (dept.length === 0) {
                     return res.status(404).json({
-                        error: { message: 'Employee with that id does not exist' }
+                        error: { message: 'No employees in that department' }
                     })
                 }
-                res.employee = employee
+                res.dept = dept
                 next()
             })
             .catch(next)
     })
     .get((req, res, next) => {
-        res.json(serializeEmployee(res.employee))
+        res.json(res.dept)
     })
     .delete((req, res, next) => {
         EmployeesService.deleteEmployee(
