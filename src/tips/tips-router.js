@@ -19,7 +19,6 @@ tipsRouter
             .catch(next)
     })
     .post(jsonParser, (req, res, next) => {
-        console.log("hello!")
         const { tip_date, emp_id, bottles, tips } = req.body
         const newTipObject = { tip_date, emp_id, tips }
 
@@ -37,7 +36,6 @@ tipsRouter
             newTipObject
         )
             .then(tipObject => {
-                console.log(tipObject)
                 res
                     .status(201)
                     .location(path.posix.join(req.originalUrl, `/`))
