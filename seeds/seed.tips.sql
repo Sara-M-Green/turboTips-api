@@ -8,21 +8,21 @@ INSERT INTO departments (dept_name)
         ('Barback'),
         ('Bartender');
 
-INSERT INTO employees (emp_name)
+INSERT INTO employees (emp_name, emp_id)
     VALUES
-        ('Back of House'),
-        ('JT'),
-        ('Fernanda G'),
-        ('Fernanda T'),
-        ('Estefania'),     
-        ('Jesus'),
-        ('Maddy'),
-        ('Cam'),
-        ('Josh'),
-        ('Alec'),
-        ('Steph'),
-        ('Tucker'),
-        ('Sara');
+        ('Back of House', 1),
+        ('JT', 2),
+        ('Fernanda G', 3),
+        ('Fernanda T', 4),
+        ('Estefania', 5),     
+        ('Jesus', 6),
+        ('Maddy', 7),
+        ('Cam', 8),
+        ('Josh', 9),
+        ('Alec', 10),
+        ('Steph', 11),
+        ('Tucker', 12),
+        ('Sara', 13);
 
 INSERT INTO employee_department (emp_id, dept_id)
     VALUES
