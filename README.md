@@ -1,5 +1,10 @@
 # Turbo Tips API
 
+## Live Link
+
+https://shelter-tip-out-client.vercel.app/
+
+### Documentation
 Turbo Tips API solicits two endpoints:
 /employees & /tips.  
 
@@ -23,9 +28,6 @@ The employee_department table is comprised of an employee ID plus a department I
 The daily_tips table is comprised of a tip date and an employee ID, together which make the primary key because a single employee will not receive tips more than once a day. The daily_tips table also stores bottles sold and tips.
 
 ![Table Relation Screen Shot](./src/images/table-relations.png?raw=true "View Tips")
-
-
-
 
 
 

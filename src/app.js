@@ -1,5 +1,4 @@
 require('dotenv').config()
-const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
@@ -21,18 +20,10 @@ app.use(cors())
 app.options('*', cors())
 app.use(morgan(morganOption))
 app.use(helmet())
-// app.use(cors({ origin:'http://localhost:3000' }))
-
 
 
 types.setTypeParser(1700, 'text', parseFloat);
 
-function processTips(rows){
-    rows.forEach((row)=> {
-        row.tips = parseFloat(row.tips)
-    })
-    return rows
-}
 
 app.use('/api/tips', tipsRouter)
 app.use('/api/employees', employeesRouter)

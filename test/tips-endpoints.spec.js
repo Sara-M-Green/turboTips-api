@@ -125,23 +125,5 @@ describe.only(`Tips Endpoints`, function() {
                     })
             })
         })
-    })
-
-    // describe.only(`DELETE /tips/:date`, () => {
-    //     context('Given there are tips in the database', () => {
-    //         cost testTips = makeTipsArray()
-
-    //         beforeEach('insert tips', () => {
-    //             return db
-    //                 .into('daily_tips')
-    //                 .insert(testTips)
-    //         })
-
-    //         it('responds with 204 and removes the tip object', () => {
-                
-    //         })
-    //     })
-    // })
-    
-    
+    })    
 })
