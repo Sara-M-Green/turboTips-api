@@ -2,7 +2,7 @@
 
 ## Live Link
 
-https://shelter-tip-out-client.vercel.app/
+https://turbotips.vercel.app/
 
 ### Documentation
 Turbo Tips API solicits two endpoints:
