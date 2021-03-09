@@ -21,30 +21,30 @@ employeesRouter
             })
             .catch(next)
     })
-    .post(jsonParser, (req, res, next) => {
-        const { emp_name } = req.body
-        const newEmployee = { emp_name }
+    // .post(jsonParser, (req, res, next) => {
+    //     const { emp_name, emp_id } = req.body
+    //     const newEmployee = { emp_name, emp_id }
 
-        if (!emp_name) {
-            return res.status(400).json({
-                error: { message: 'Employee name required' }
-            })
-        }
+    //     if (!emp_name) {
+    //         return res.status(400).json({
+    //             error: { message: 'Employee name required' }
+    //         })
+    //     }
 
-        newEmployee.emp_name = emp_name;
+    //     newEmployee.emp_name = emp_name;
 
-        EmployeesService.addEmployee(
-            req.app.get('db'),
-            newEmployee
-        )
-            .then(employee => {
-                res
-                    .status(201)
-                    .location(path.posix.join(req.originalUrl, `/${employee.emp_id}`))
-                    .json(serializeEmployee(employee))
-            })
-            .catch(next)
-    })
+    //     EmployeesService.addEmployee(
+    //         req.app.get('db'),
+    //         newEmployee
+    //     )
+    //         .then(employee => {
+    //             res
+    //                 .status(201)
+    //                 .location(path.posix.join(req.originalUrl, `/${employee.emp_id}`))
+    //                 .json(serializeEmployee(employee))
+    //         })
+    //         .catch(next)
+    // })
 
 employeesRouter
     .route('/:dept')
@@ -67,15 +67,15 @@ employeesRouter
     .get((req, res, next) => {
         res.json(res.dept)
     })
-    .delete((req, res, next) => {
-        EmployeesService.deleteEmployee(
-            req.app.get('db'),
-            req.params.emp_id
-        )
-            .then(numRowsAffected => {
-                res.status(204).end()
-            })
-            .catch(next)
-    })
+    // .delete((req, res, next) => {
+    //     EmployeesService.deleteEmployee(
+    //         req.app.get('db'),
+    //         req.params.emp_id
+    //     )
+    //         .then(numRowsAffected => {
+    //             res.status(204).end()
+    //         })
+    //         .catch(next)
+    // })
 
 module.exports = employeesRouter
